@@ -1,0 +1,6 @@
+experiment:
+  input_filepath: ./data/processed/dataset.pt
+  seed: 0
+  lr: 0.01
+  weight_decay: 0.0005
+  epochs: 200
