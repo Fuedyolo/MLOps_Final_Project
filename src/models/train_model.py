@@ -1,48 +1,49 @@
 import torch
+from torch import nn
+from torch import optim
 import torch.nn.functional as F
+import click
 import logging
 from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
 from src.models.model import GCN
 import matplotlib.pyplot as plt 
-import hydra
-from hydra.utils import get_original_cwd
-import os
    
-@hydra.main(version_base = None, config_path = '../config', config_name="default_config.yaml")
-def main(cfg):
-    print(f"Current working directory : {os.getcwd()}")
-    print(f"Orig working directory    : {get_original_cwd()}")
+@click.command()
+@click.argument('input_filepath', type=click.Path(exists=True))
+@click.argument('model_filepath', type=click.Path())
+@click.argument('figure_filepath', type=click.Path())
+@click.option('--lr', type=float, default=0.01)
+@click.option('--weight_decay', type=int, default=5e-4)
+@click.option('--epochs', type=int, default=200)
+def main(input_filepath, model_filepath, figure_filepath, lr, weight_decay, epochs):
     logger = logging.getLogger(__name__)
     logger.info('training model')
     
-    hparams = cfg.experiment
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    torch.manual_seed(hparams['seed'])
     
-    dataset = torch.load(f"{get_original_cwd()}/{hparams['input_filepath']}")
+    dataset = torch.load(input_filepath)
     data = dataset[0].to(device)
     model = GCN(dataset.num_node_features, dataset.num_classes).to(device)
-    optimizer = torch.optim.Adam(model.parameters(), lr=hparams['lr'], weight_decay=hparams['weight_decay'])
+    optimizer = torch.optim.Adam(model.parameters(), lr=lr, weight_decay=weight_decay)
 
     train_loss = []
     model.train()
-    for epoch in range(hparams['epochs']):
+    for epoch in range(epochs):
+        
         optimizer.zero_grad()
         out = model(data)
         loss = F.nll_loss(out[data.train_mask], data.y[data.train_mask])
         loss.backward()
         optimizer.step()
         train_loss.append(loss.item())
-        if epoch % 10 == 0:
-            logger.info(f'Training loss: {loss.item()}')
 
-    torch.save(model.state_dict(), f"{os.getcwd()}/trained_model.pt")
+    torch.save(model.state_dict(), model_filepath)
     
-    plt.plot(range(1, hparams['epochs'] + 1), train_loss)
+    plt.plot(range(1, epochs + 1), train_loss)
     plt.xlabel('Training step')
     plt.ylabel('Training loss') 
-    plt.savefig(f"{os.getcwd()}/training.png")    
+    plt.savefig(figure_filepath)    
     
 if __name__ == '__main__':
     log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
