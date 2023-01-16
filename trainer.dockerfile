@@ -12,18 +12,12 @@ COPY src/ src/
 
 WORKDIR /
 RUN pip install -r requirements.txt --no-cache-dir
-<<<<<<< Updated upstream
-RUN pip install -e .
-#RUN pip uninstall src
-#RUN pip install -e .
-=======
 #RUN pip install -e .
 #RUN pip uninstall src
 #RUN pip install -e .
 RUN ["pip", "install", "-e", "."]
 RUN ["pip", "install", "torch-sparse"]
 RUN ["pip", "install", "torch-scatter"]
->>>>>>> Stashed changes
 
 ENTRYPOINT ["python", "-u", "src/models/train_model.py"]
 

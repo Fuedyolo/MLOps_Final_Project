@@ -1,17 +1,7 @@
-Pytorch Geometric for classification of CiteSeer papers
+mlops_project
 ==============================
 
-This repository contains the project work carried out by group 27 (Lucie Fontaine, Mathias Sofus Hovmark and Frederik Ommundsen) in the MLOps course taught at DTU. 
-
-1. **Overall goal**: The overall goal is to use the Citeseer dataset and predict which scientific class each node belongs to using a GNN.
-
-2. **What framework are you going to use (Kornia, Transformer, Pytorch-Geometrics)**: We are going to use the Pytorch Geometrics framework as we are building a GNN.
-
-3. **How to you intend to include the framework into your project**: We intent to use the torch_geometric nn class to build the gnn and use the torch_geometric explain/profile class to show the results. A number of the other classes are also used to load the dataset. 
-
-4. **What data are you going to run on (initially, may change)**: We are going to run on the Citeseer dataset that consists of 3,327 nodes, 9,104 edges, 3,703 features and 6 classes. There is only 1 graph in this network as all the nodes are connected to at least one other node. 
-
-5. **What deep learning models do you expect to use**: We expect to use Graph neural network/Graph convolutional network.
+Pytorch geometric
 
 Project Organization
 ------------

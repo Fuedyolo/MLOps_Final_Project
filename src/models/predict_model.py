@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 import numpy as np
 import torch
 import click
@@ -7,7 +5,9 @@ import logging
 from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
 from model import GCN
-   
+
+# Github
+
 @click.command()
 @click.argument('model_filepath', type=click.Path(exists=True))
 @click.argument('data_filepath', type=click.Path(exists=True))
@@ -27,4 +27,3 @@ def main(model_filepath, data_filepath):
     
 if __name__ == '__main__':
     main()
->>>>>>> Stashed changes

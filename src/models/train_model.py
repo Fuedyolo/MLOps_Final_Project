@@ -1,5 +1,3 @@
-<<<<<<< Updated upstream
-=======
 import torch
 import torch.nn.functional as F
 import logging
@@ -63,4 +61,3 @@ if __name__ == '__main__':
     #load_dotenv(find_dotenv())
 
     main()
->>>>>>> Stashed changes
