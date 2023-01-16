@@ -2,7 +2,7 @@ name: "Run tests"
 
 on:
   push:
-    branches: [ master, main ]
+    branches: [ master, main, MobyDocker ]
   pull_request:
     branches: [ master, main ]
 
@@ -22,7 +22,7 @@ jobs:
       run: |
         python -m pip install --upgrade pip
         pip install -r requirements.txt
-        pip install -r requirements_tests.txt
+        #pip install -r requirements_tests.txt
     - name: Test with pytest
       run: |
         pip install pytest
