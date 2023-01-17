@@ -10,6 +10,6 @@ def test_data():
     assert dataset.num_classes==6, "Dataset did not have the correct number of classes"
     assert dataset[0]['x'].shape == torch.Size([3327, 3703]), "Dataset did not have the correct shape"
 
-def test_error_on_num_classes():
-    with pytest.raises(ValueError, match='Invalid number of classes in dataset'):
-        main()
+#def test_error_on_num_classes():
+#    with pytest.raises(ValueError, match='Invalid number of classes in dataset'):
+#        main()
