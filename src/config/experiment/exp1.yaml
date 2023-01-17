@@ -1,0 +1,6 @@
+input_filepath: 'data/processed/dataset.pt'
+seed: 0
+lr: 0.002829
+weight_decay: 0.00006259
+epochs: 50
+log_interval: 10
