@@ -7,7 +7,5 @@ python-dotenv==0.21.0
 setuptools==65.6.3
 torch==1.13.1
 torch_geometric==2.2.0
-torch_sparse
-torch_scatter
 
 -e .
