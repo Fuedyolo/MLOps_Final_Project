@@ -7,7 +7,7 @@ from dotenv import find_dotenv, load_dotenv
 from src.models.model import GCN
 
 # Github
-
+# Does the trigger work?
 
 @click.command()
 @click.argument("model_filepath", type=click.Path(exists=True))
