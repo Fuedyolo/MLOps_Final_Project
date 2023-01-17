@@ -8,9 +8,11 @@ import matplotlib.pyplot as plt
 import hydra
 from hydra.utils import get_original_cwd
 import os
+import wandb
    
 @hydra.main(version_base = None, config_path = '../config', config_name="default_config.yaml")
 def main(cfg):
+    wandb.init(project='MLOps', entity='team-27')
     print(f"Current working directory : {os.getcwd()}")
     print(f"Orig working directory    : {get_original_cwd()}")
     logger = logging.getLogger(__name__)
@@ -33,9 +35,11 @@ def main(cfg):
         loss = F.nll_loss(out[data.train_mask], data.y[data.train_mask])
         loss.backward()
         optimizer.step()
-        train_loss.append(loss.item())
-        if epoch % 10 == 0:
-            logger.info(f'Training loss: {loss.item()}')
+        loss = loss.item()
+        train_loss.append(loss)
+        if epoch % hparams['log_interval'] == 0:
+            logger.info(f'Training loss: {loss}')
+            wandb.log({'loss': loss})
 
     torch.save(model.state_dict(), f"{os.getcwd()}/trained_model.pt")
     
