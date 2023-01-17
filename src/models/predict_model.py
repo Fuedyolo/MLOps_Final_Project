@@ -4,7 +4,7 @@ import click
 import logging
 from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
-from model import GCN
+from src.models.model import GCN
 
 # Github
 

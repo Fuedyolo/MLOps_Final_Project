@@ -17,5 +17,5 @@ RUN ["pip", "install", "-e", "."]
 RUN ["pip", "install", "torch-sparse"]
 RUN ["pip", "install", "torch-scatter"]
 
-ENTRYPOINT ["python", "-u", "src/models/train_model.py"]
+ENTRYPOINT ["python", "-u", "src/models/predict_model.py"]
 
