@@ -21,7 +21,7 @@ def main():
     #torch.manual_seed(hparams['seed'])
     
     dataset = torch.load('src/data/processed/dataset.pt')
-    if dataset.num_classes!=7:
+    if dataset.num_classes!=6:
         raise ValueError('Invalid number of classes in dataset')
     
     data = dataset[0].to(device)
