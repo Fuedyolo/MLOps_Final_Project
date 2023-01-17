@@ -1,5 +1,5 @@
 input_filepath: 'data/processed/dataset.pt'
 seed: 0
-lr: 0.01
-weight_decay: 5e-4
-epochs: 200
+lr: 0.002829
+weight_decay: 0.00006259
+epochs: 50
