@@ -3,7 +3,7 @@ import torch.nn.functional as F
 import logging
 from pathlib import Path
 from dotenv import find_dotenv, load_dotenv
-from src.models.model import GCN
+from src_2.models.model import GCN
 import matplotlib.pyplot as plt 
 import hydra
 from hydra.utils import get_original_cwd

@@ -1,6 +1,6 @@
 import torch
 from torch import nn, optim
-from src.models.model import GCN
+from src_2.models.model import GCN
 from torch_geometric.data import Data
 
 def test_training():

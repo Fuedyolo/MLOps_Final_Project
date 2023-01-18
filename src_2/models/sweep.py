@@ -1,6 +1,6 @@
 import torch
 import torch.nn.functional as F
-from src.models.model import GCN
+from src_2.models.model import GCN
 import wandb
 import numpy as np
 
