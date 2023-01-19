@@ -79,9 +79,9 @@ end of the project.
 * [ ] Create a data storage in GCP Bucket for you data and preferable link this with your data version control setup
 * [x] Create a trigger workflow for automatically building your docker images
 * [x] Get your model training in GCP using either the Engine or Vertex AI
-* [ ] Create a FastAPI application that can do inference using your model
+* [x] Create a FastAPI application that can do inference using your model
 * [ ] If applicable, consider deploying the model locally using torchserve
-* [ ] Deploy your model in GCP using either Functions or Run as the backend
+* [x] Deploy your model in GCP using either Functions or Run as the backend
 
 ### Week 3
 
@@ -273,7 +273,7 @@ We did not make use of dvc as the dataset was a part of the package that was als
 >
 > Answer:
 
-We used a simple argparser for the predict model script which can be called with: python src_2/models/predict_model.py outputs\2023-01-13\21-47-22\trained_model.pt data\processed\dataset.pt The two paths specified is the path to the model and the path to the dataset. The training script can simply be called with python src_2/models/train_model.py, however wandb is used and the user is prompted the 3 standard wandb options. 
+We used a simple argparser for the predict model script which can be called with: python src_2/models/predict_model.py outputs\2023-01-13\21-47-22\trained_model.pt data\processed\dataset.pt The two paths specified is the path to the model and the path to the dataset. The training script can simply be called with python src_2/models/train_model.py, however wandb is used and the user is prompted the 3 standard wandb options. The application created with fastapi also needs a parameter which is the dataset, and with that it gives the accuracy for the model we trained. 
 
 ### Question 13
 
