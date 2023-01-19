@@ -163,7 +163,7 @@ We used conda to install and manage our dependencies. All the required dependenc
 > *experiments.*
 > Answer:
 
---- question 5 fill here ---
+The vast majority of the code is found in the src_2 folder, the rests of the folders should be self explanatory which is one of the benefits of cookiecutter. We removed the folders notebooks, models and src, and added the src_2 folder instead. This was done because as creating a new environment and automatically installing all the packages with either conda or pip would create a src folder that would interfere with the import statements within the source folder. We added a tests folder containing a few unit tests. The yml files and the dockerfile(s) was added directly to the root of the project. The models created are in the outputs folder. 
 
 ### Question 6
 
@@ -174,7 +174,7 @@ We used conda to install and manage our dependencies. All the required dependenc
 >
 > Answer:
 
---- question 6 fill here ---
+We didn't implement any rules for code quality or format but we did follow the pep8 standard and used both flake8 and black throughout the process as to keep everything fairly organised. This makes it easier when multiple people are contributing to a project as the code should be more readable. Also when complying to a standard there is less probability for errors. (https://standards.ieee.org/beyond-standards/what-are-standards-why-are-they-important/)
 
 ## Version control
 
@@ -193,7 +193,7 @@ We used conda to install and manage our dependencies. All the required dependenc
 >
 > Answer:
 
---- question 7 fill here ---
+we implemented 3 different tests, one for the training part of the model and two for the dataset part, just to ensure that the data entered is valid. Further a tests was implemented to make sure that the trained model was not empty. This was done such that there is an actual training (for 1 epoch) and the model outcome of that training is used to check wheter or not the model contain parameters. 
 
 ### Question 8
 
@@ -223,7 +223,7 @@ We used conda to install and manage our dependencies. All the required dependenc
 >
 > Answer:
 
---- question 9 fill here ---
+We made use of branches in the project, primarily so that each person could work on their own branch as to not interfere with the work of the others. Pull requests were then used to merge the branches. 
 
 ### Question 10
 
@@ -238,7 +238,7 @@ We used conda to install and manage our dependencies. All the required dependenc
 >
 > Answer:
 
---- question 10 fill here ---
+We did not make use of dvc as the dataset was a part of the package that was also used to create the network. Thus the data never changed and nothing new was added to the data. Therefor data version control did not make sense in this project. However if the project was using data that might change and it could be usefull to capture which version of the data that was used in a given commit to github. 
 
 ### Question 11
 
@@ -273,7 +273,7 @@ We used conda to install and manage our dependencies. All the required dependenc
 >
 > Answer:
 
---- question 12 fill here ---
+We used config files to note down the hyper 
 
 ### Question 13
 
@@ -352,8 +352,7 @@ We used conda to install and manage our dependencies. All the required dependenc
 >
 > Answer:
 
---- question 17 fill here ---
-
+We used the following services: Compute Engine, cloud trigger, cloud run, vertex ai and container registry. Compute Engine was used to create the a VM, the specifications of the VM was similar to the ones used in the course. The container registry was used to store the image that was created from the dockerfile. Cloud triggers was used to automatically create the new container image when the main branch of the github repo was updated (this was disabled most of the time as new docker images were not needed) Cloud run was used to deploy a simple app that let the user input a datapoint and then predict the output. Vertex ai was used to do model training. 
 ### Question 18
 
 > **The backbone of GCP is the Compute engine. Explained how you made use of this service and what type of VMs**
@@ -376,7 +375,7 @@ We used conda to install and manage our dependencies. All the required dependenc
 >
 > Answer:
 
---- question 19 fill here ---
+We did not use GCP buckets as the dataset was stored within the torch-geometric package and therefor available to everyone with the package.
 
 ### Question 20
 
@@ -385,7 +384,8 @@ We used conda to install and manage our dependencies. All the required dependenc
 >
 > Answer:
 
---- question 20 fill here ---
+Below is the image of the containers in the registry, however they are in the same project as the ones used during the exercises in the course.
+[container registry](figures/registry.png)
 
 ### Question 21
 
@@ -410,7 +410,7 @@ We used conda to install and manage our dependencies. All the required dependenc
 >
 > Answer:
 
---- question 22 fill here ---
+Using a fastapi application the model was delpoyed to google cloud run and can be invoked by giving a valid data sample where the model will then predict and return the outcome. The setup settings was 
 
 ### Question 23
 
@@ -439,7 +439,7 @@ We used conda to install and manage our dependencies. All the required dependenc
 >
 > Answer:
 
---- question 24 fill here ---
+The billing pane did not show any costs used at all during the month of january however one group member used up all the credits and another used around half of the credits up until the day before the exam. Most of the credits were spend in cloud engine, cloud logging, cloud storage and cloud build.
 
 ## Overall discussion of project
 
@@ -491,4 +491,8 @@ We used conda to install and manage our dependencies. All the required dependenc
 >
 > Answer:
 
---- question 27 fill here ---
+s173853 : was in charge of building the docker images and the unit tests/github actions
+s212804 : was in charge of setting up the project structure and building the model and weights/biases
+s183951 : was in charge of the things done with gcp and the deployement of the model
+
+Further all team members contributed to the writing of the report.
