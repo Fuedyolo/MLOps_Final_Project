@@ -3,10 +3,7 @@ from typing import Optional
 import cv2
 from fastapi.responses import FileResponse
 
-
 import pandas as pd
-#df=pd.read_excel('Datafile.xlsx')
-#df.iloc[0].values[0]
 from io import BytesIO
 
 import torch
@@ -67,7 +64,7 @@ async def cv_model(efile: UploadFile = File(...)):
     data = dataset[0]
 
     model = GCN(dataset.num_node_features, dataset.num_classes)
-    state_dict = torch.load('outputs/2023-01-13/22-17-30/trained_model.pt')
+    state_dict = torch.load('outputs/2023-01-19/16-52-11/trained_model.pt')
     model.load_state_dict(state_dict)
     model.eval()
     with torch.no_grad():
@@ -84,3 +81,17 @@ async def cv_model(efile: UploadFile = File(...)):
    }
     return response
 
+
+from fastapi import Request, FastAPI, APIRouter, Body
+@app.post("/post_1/")
+async def cv_model(id: str, password: str):
+    
+    response = {
+      "input": 10,
+      "message": HTTPStatus.OK.phrase,
+      "status-code": HTTPStatus.OK,
+      "output": id
+   }
+    return response
+
+#

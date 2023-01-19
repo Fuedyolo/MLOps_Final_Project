@@ -129,7 +129,7 @@ s183951, s173853, s212804
 >
 > Answer:
 
-We choose to work with the pytorch geometric framework, from where we got both the dataset and the model framework. The framework itself actually complicated the project a bit as a lot of the time was used on dependency issues and installation requirements that did not work. However the framework itself worked just fine once installed and we were able to create, train and predict using a model from the framework. We got the data from the Dataset class of pytorch-geometric. We used many of the frameworks taught in the course such as wandb, docker, github actions and gcp. We did not use any frameworks not taught in the course. 
+We choose to work with the pytorch geometric framework, from where we got both the dataset and the model framework. The framework itself actually complicated the project a bit as a lot of the time was used on dependency issues and installation requirements that did not work (most torch-sparse and torch-scatter). However the framework itself worked just fine once installed and we were able to create, train and predict using a model from the framework. We got the data from the Dataset class of pytorch-geometric. We used many of the frameworks taught in the course such as wandb, docker, github actions and gcp. We did not use any frameworks not taught in the course. 
 
 ## Coding environment
 
@@ -163,7 +163,7 @@ We used conda to install and manage our dependencies. All the required dependenc
 > *experiments.*
 > Answer:
 
-The vast majority of the code is found in the src_2 folder, the rests of the folders should be self explanatory which is one of the benefits of cookiecutter. We removed the folders notebooks, models and src, and added the src_2 folder instead. This was done because as creating a new environment and automatically installing all the packages with either conda or pip would create a src folder that would interfere with the import statements within the source folder. We added a tests folder containing a few unit tests. The yml files and the dockerfile(s) was added directly to the root of the project. The models created are in the outputs folder. 
+The vast majority of the code is found in the src_2 folder, the rests of the folders should be self explanatory which is one of the benefits of cookiecutter. We removed the folders notebooks, models and src, and added the src_2 folder instead. This was done because as creating a new environment and automatically installing all the packages with either conda or pip would create a src folder that would interfere with the import statements within the source folder. Even when we interacted with our docker images we were unable to uninstall the faulty 'src' module and thus settled upon just giving our module a different name to avoid this conflict. We added a tests folder containing a few unit tests. The yml files and the dockerfile(s) was added directly to the root of the project. The models created are in the outputs folder. 
 
 ### Question 6
 
