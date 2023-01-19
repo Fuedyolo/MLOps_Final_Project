@@ -1,25 +1,25 @@
 # -*- coding: utf-8 -*-
-import click
 import logging
 from pathlib import Path
+
+import click
+import torch
 from dotenv import find_dotenv, load_dotenv
 from torch_geometric.datasets import Planetoid
-import torch
 
 
 @click.command()
-@click.argument('output_filepath', type=click.Path())
-def main(output_filepath):
-    """ Save the CiteSeer data object. 
-    """
+@click.argument("output_filepath", type=click.Path())
+def main(output_filepath: str):
+    """Save the CiteSeer dataset object."""
     logger = logging.getLogger(__name__)
-    logger.info('saving dataset')
-    dataset = Planetoid(root='/tmp/CiteSeer', name='CiteSeer')
+    logger.info("saving dataset")
+    dataset = Planetoid(root="/tmp/CiteSeer", name="CiteSeer")
     torch.save(dataset, output_filepath)
 
 
-if __name__ == '__main__':
-    log_fmt = '%(asctime)s - %(name)s - %(levelname)s - %(message)s'
+if __name__ == "__main__":
+    log_fmt = "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
     logging.basicConfig(level=logging.INFO, format=log_fmt)
 
     # not used in this stub but often useful for finding various files

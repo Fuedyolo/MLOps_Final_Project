@@ -1,8 +1,11 @@
-from tests import _PATH_DATA
-import torch
-import pytest
-from src_2.models.train_model import main
 import os.path
+
+import pytest
+import torch
+
+from src_2.models.train_model import main
+from tests import _PATH_DATA
+
 
 @pytest.mark.skipif(not os.path.exists(_PATH_DATA + '/dataset.pt'), reason="Data files not found")
 def test_data():
