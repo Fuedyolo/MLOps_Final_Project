@@ -1,0 +1,50 @@
+{
+    "os": "Windows-10-10.0.19045-SP0",
+    "python": "3.10.0",
+    "heartbeatAt": "2023-01-19T15:52:18.653812",
+    "startedAt": "2023-01-19T15:52:17.314425",
+    "docker": null,
+    "cuda": null,
+    "args": [],
+    "state": "running",
+    "program": "C:\\Users\\FrederikOmmundsen\\Documents\\GitHub\\MLOps_Final_Project\\src_2\\models\\train_model.py",
+    "codePath": "src_2\\models\\train_model.py",
+    "git": {
+        "remote": "https://github.com/Fuedyolo/MLOps_Final_Project.git",
+        "commit": "8cd53f4045fdfad95e131bf33e2cff0f3d187e0c"
+    },
+    "email": "frederik.ommundsen@gmail.com",
+    "root": "C:/Users/FrederikOmmundsen/Documents/GitHub/MLOps_Final_Project",
+    "host": "LAPTOP-A08M4NJN",
+    "username": "FrederikOmmundsen",
+    "executable": "C:\\Users\\FrederikOmmundsen\\anaconda3\\envs\\maybeworksnow\\python.exe",
+    "cpu_count": 6,
+    "cpu_count_logical": 12,
+    "cpu_freq": {
+        "current": 2712.0,
+        "min": 0.0,
+        "max": 2712.0
+    },
+    "cpu_freq_per_core": [
+        {
+            "current": 2712.0,
+            "min": 0.0,
+            "max": 2712.0
+        }
+    ],
+    "disk": {
+        "total": 475.69237899780273,
+        "used": 244.34693145751953
+    },
+    "gpu": "Quadro RTX 3000",
+    "gpu_count": 1,
+    "gpu_devices": [
+        {
+            "name": "Quadro RTX 3000",
+            "memory_total": 6442450944
+        }
+    ],
+    "memory": {
+        "total": 31.725914001464844
+    }
+}

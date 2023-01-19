@@ -273,7 +273,7 @@ We did not make use of dvc as the dataset was a part of the package that was als
 >
 > Answer:
 
-We used config files to note down the hyper 
+We used a simple argparser for the predict model script which can be called with: python src_2/models/predict_model.py outputs\2023-01-13\21-47-22\trained_model.pt data\processed\dataset.pt The two paths specified is the path to the model and the path to the dataset. The training script can simply be called with python src_2/models/train_model.py, however wandb is used and the user is prompted the 3 standard wandb options. 
 
 ### Question 13
 
@@ -288,7 +288,8 @@ We used config files to note down the hyper
 >
 > Answer:
 
---- question 13 fill here ---
+We used config files such that each run of the model would create a hydra folder with a config.yaml file which indicitas the settings used for that run, eg. epochs, learning rate etc. 
+
 
 ### Question 14
 
@@ -320,7 +321,7 @@ We used config files to note down the hyper
 >
 > Answer:
 
---- question 15 fill here ---
+We used docker mostly to get the different part of the project to work with gcp. We used the docker image to both train the project on gcp but also to deploy a function with cloud run. The first docker image is run by simply docker run <name> trainer:latest. The second docker image is run by the same command and by specifying which port the user wants to be able to run the application on. 
 
 ### Question 16
 
@@ -366,8 +367,10 @@ We used the following services: Compute Engine, cloud trigger, cloud run, vertex
 >
 > Answer:
 
---- question 18 fill here ---
-
+We used the compute engine to create the instance we used for almost all other gcp feautres in this project. The following hardware was used: 
+Machine type: n1-standard-1
+CPU platform: Intel Haswell
+Architecture: x86/64
 ### Question 19
 
 > **Insert 1-2 images of your GCP bucket, such that we can see what data you have stored in it.**
