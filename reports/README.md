@@ -58,7 +58,7 @@ end of the project.
 * [x] Add a model file and a training script and get that running
 * [x] Remember to fill out the `requirements.txt` file with whatever dependencies that you are using
 * [x] Remember to comply with good coding practices (`pep8`) while doing the project
-* [ ] Do a bit of code typing and remember to document essential parts of your code
+* [x] Do a bit of code typing and remember to document essential parts of your code
 * [ ] Setup version control for your data or part of your data
 * [x] Construct one or multiple docker files for your code
 * [x] Build the docker files locally and make sure they work as intended
@@ -148,7 +148,7 @@ We choose to work with the pytorch geometric framework, from where we got both t
 >
 > Answer:
 
-We used conda to install and manage our dependencies. All the required dependencies can be downloaded and installed by using either the requirements.txt if installing with pip, or using the environment.yml if installing with conda. In both cases a fresh environment should be setup. Furthermore if installing with pip a new user might be required to install the packages torch-sparse and torch-scatter seperatly. For the latter packages to work a windows user would have to install visual studio build tools to get a c/c++ compiler. The list of dependecies was created with the pipreqs package that automatically scans the projectfolder for the used packages.
+We used conda for managing our dependencies. The list of dependencies was auto-generated using pipreqs. To get a complete copy of your development environment, one would have to run the following command: `conda env create -f environment.yml`. 
 
 ### Question 5
 
@@ -163,7 +163,7 @@ We used conda to install and manage our dependencies. All the required dependenc
 > *experiments.*
 > Answer:
 
-The vast majority of the code is found in the src_2 folder, the rests of the folders should be self explanatory which is one of the benefits of cookiecutter. We removed the folders notebooks, models and src, and added the src_2 folder instead. This was done because as creating a new environment and automatically installing all the packages with either conda or pip would create a src folder that would interfere with the import statements within the source folder. Even when we interacted with our docker images we were unable to uninstall the faulty 'src' module and thus settled upon just giving our module a different name to avoid this conflict. We added a tests folder containing a few unit tests. The yml files and the dockerfile(s) was added directly to the root of the project. The models created are in the outputs folder. 
+The vast majority of the code is found in the src_2 folder, the rests of the folders should be self explanatory which is one of the benefits of cookiecutter. We removed the folders notebooks, models and src, and added the src_2 folder instead. This was done because when building an image, installing all the packages with pip would create a src folder that would interfere with the import statements within the source folder. Even when we interacted with our docker images we were unable to uninstall the faulty 'src' module and thus settled upon just giving our module a different name to avoid this conflict. We added a tests folder containing a few unit tests. The yml files and the dockerfile(s) was added directly to the root of the project. The models are created in the outputs folder by default using hydra. 
 
 ### Question 6
 
@@ -174,7 +174,8 @@ The vast majority of the code is found in the src_2 folder, the rests of the fol
 >
 > Answer:
 
-We didn't implement any rules for code quality or format but we did follow the pep8 standard and used both flake8 and black throughout the process as to keep everything fairly organised. This makes it easier when multiple people are contributing to a project as the code should be more readable. Also when complying to a standard there is less probability for errors. (https://standards.ieee.org/beyond-standards/what-are-standards-why-are-they-important/)
+We added documentation to the code using docstrings for the functions that were more difficult to understand, to explain their purpose. In terms of styling, we used black to format the code in order to be pep8 compliant, and isort to sort the import statements. We also added typing to most of our functions as a good coding practice, despite their simplicity.
+This makes it easier when multiple people are contributing to a project as the code should be more readable. Also when complying to a standard there is less probability for errors (https://standards.ieee.org/beyond-standards/what-are-standards-why-are-they-important/).
 
 ## Version control
 
@@ -193,7 +194,7 @@ We didn't implement any rules for code quality or format but we did follow the p
 >
 > Answer:
 
-we implemented 3 different tests, one for the training part of the model and two for the dataset part, just to ensure that the data entered is valid. Further a tests was implemented to make sure that the trained model was not empty. This was done such that there is an actual training (for 1 epoch) and the model outcome of that training is used to check wheter or not the model contain parameters. 
+We implemented data and training testing. We test whether the dataset is valid, and check for parameter update during training by training a model for one epoch on a random dataset and then looking at the gradients of the model parameters. 
 
 ### Question 8
 
