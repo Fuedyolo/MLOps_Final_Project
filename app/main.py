@@ -2,12 +2,9 @@ from fastapi import UploadFile, File
 from fastapi.responses import FileResponse
 
 import pandas as pd
-<<<<<<< HEAD
 
 # df=pd.read_excel('Datafile.xlsx')
 # df.iloc[0].values[0]
-=======
->>>>>>> f2627b8ef65b8e85abd14e91978eaee55b3588a9
 from io import BytesIO
 
 import torch
