@@ -1,11 +1,13 @@
 from fastapi import UploadFile, File
 from fastapi.responses import FileResponse
 
-
 import pandas as pd
+<<<<<<< HEAD
 
 # df=pd.read_excel('Datafile.xlsx')
 # df.iloc[0].values[0]
+=======
+>>>>>>> f2627b8ef65b8e85abd14e91978eaee55b3588a9
 from io import BytesIO
 
 import torch
@@ -67,19 +69,34 @@ async def cv_model(efile: UploadFile = File(...)):
     data = dataset[0]
 
     model = GCN(dataset.num_node_features, dataset.num_classes)
-    state_dict = torch.load("outputs/2023-01-13/22-17-30/trained_model.pt")
+    state_dict = torch.load('outputs/2023-01-19/16-52-11/trained_model.pt')
     model.load_state_dict(state_dict)
     model.eval()
     with torch.no_grad():
         pred = model(data).argmax(dim=1)
         correct = (pred[data.test_mask] == data.y[data.test_mask]).sum()
         acc = int(correct) / int(data.test_mask.sum())
-        # print(f'Accuracy: {acc:.4f}')
-
+        #print(f'Accuracy: {acc:.4f}')
+    
     response = {
-        "input": 10,
-        "message": HTTPStatus.OK.phrase,
-        "status-code": HTTPStatus.OK,
-        "output": acc,
-    }
+      "input": "You provided a torch dataset input in order to receive an accuracy score",
+      "message": HTTPStatus.OK.phrase,
+      "status-code": HTTPStatus.OK,
+      "output": acc
+   }
     return response
+
+
+from fastapi import Request, FastAPI, APIRouter, Body
+@app.post("/post_1/")
+async def cv_model(id: str, password: str):
+    
+    response = {
+      "input": 10,
+      "message": HTTPStatus.OK.phrase,
+      "status-code": HTTPStatus.OK,
+      "output": id
+   }
+    return response
+
+#
