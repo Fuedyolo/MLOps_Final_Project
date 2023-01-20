@@ -223,7 +223,7 @@ we implemented 3 different tests, one for the training part of the model and two
 >
 > Answer:
 
-We made use of branches in the project, primarily so that each person could work on their own branch as to not interfere with the work of the others. Pull requests were then used to merge the branches. 
+We made use of branches in the project, primarily so that each person could work on their own branch as to not interfere with the work of the others. A new branch was typically also created while prototyping a new feature (e.g. a branch for Docker, Github Actions etc.). Pull requests were then used to merge the branches. 
 
 ### Question 10
 

@@ -74,7 +74,7 @@ async def cv_model(efile: UploadFile = File(...)):
         #print(f'Accuracy: {acc:.4f}')
     
     response = {
-      "input": 10,
+      "input": "You provided a torch dataset input in order to receive an accuracy score",
       "message": HTTPStatus.OK.phrase,
       "status-code": HTTPStatus.OK,
       "output": acc
