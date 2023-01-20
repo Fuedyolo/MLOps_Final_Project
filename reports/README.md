@@ -466,7 +466,9 @@ The billing pane did not show any costs used at all during the month of january 
 > *Whenever we commit code and puch to github, it auto triggers ... and ... . From there the diagram shows ...*
 >
 > Answer:
-
+The starting point of the diagram is out local setup on our computers. In this step the code is being developed and structured using the cookiecutter template. Hydra is responsible for the local logging of experiments while wandb is used to log and visualize the results as well as doing the hyperparameter sweep.
+Whenever the code is committed and pushed to GitHub (typically to a new development branch) this activates a sequence of processes. 1) unittests on the data and the main ML model are carried out via GitHub actions. Caching of dependencies was used to speed up this process. 2) A cloud build of the model is made via GCL and the dockerfile (which makes use of the requirements file to install the required libraries). The build concludes with a new model being trained on the data and the results being logged by Hydra/wandb. 3) As an alternative to 2) local docker images were also being generated throughout the development process.
+In order to use our model a user can either clone the github repo or pull the latest docker image. The app is not deployed 100% yet but it is possible to upload a dataset to a locally deployed fastapi app and use the model there.
 ![overview](figures/overview.png)
 
 ### Question 26
@@ -481,7 +483,7 @@ The billing pane did not show any costs used at all during the month of january 
 >
 > Answer:
 
-The main difficulty of running the experiments was understanding how to configure them, and run a hyperparameter sweep, using hydra and wandb. A minor setback was the issues with the required dependencies and the installation of those. A big challenge was getting the fastAPI app to work with correct and to work with cloud run. Furthermore, the specfic formulation of the docker files was also a big challenge and definently something that requires a lot of practice to master. As with all data science/software development a lot of time was spend on minor bugs, in this case path related bugs especially. 
+The main difficulty of running the experiments was understanding how to configure them, and run a hyperparameter sweep, using hydra and wandb. A minor setback was the issues with the required dependencies and the installation of those. A big challenge was getting the fastAPI app to work with correct and to work with cloud run - the problem was mostly with figuring out how to push datafiles to the app. Furthermore, the specific formulation of the docker files was also a big challenge and definently something that requires a lot of practice to master. As with all data science/software development a lot of time was spend on minor bugs, in this case path related bugs especially. 
 
 ### Question 27
 
@@ -498,7 +500,7 @@ The main difficulty of running the experiments was understanding how to configur
 >
 > Answer:
 
-* s173853 : was in charge of building the docker images and the unit tests/github actions
+* s173853 : was in charge of building the docker images, setting up local deployment and the unit tests/github actions
 * s212804 : was in charge of setting up the project structure, configuring and logging the experiments, as well as profiling.
 * s183951 : was in charge of the things done with gcp and the deployement of the model
 
