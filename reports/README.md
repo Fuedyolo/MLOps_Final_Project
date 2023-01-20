@@ -42,6 +42,62 @@ short, too long, have you included an image when asked to.
 For both functions to work it is important that you do not rename anything. The script have two dependencies that can
 be installed with `pip install click markdown`.
 
+## Overall project checklist
+
+The checklist is *exhaustic* which means that it includes everything that you could possible do on the project in
+relation the curricilum in this course. Therefore, we do not expect at all that you have checked of all boxes at the
+end of the project.
+
+### Week 1
+
+* [x] Create a git repository
+* [x] Make sure that all team members have write access to the github repository
+* [x] Create a dedicated environment for you project to keep track of your packages
+* [x] Create the initial file structure using cookiecutter
+* [x] Fill out the `make_dataset.py` file such that it downloads whatever data you need and
+* [x] Add a model file and a training script and get that running
+* [x] Remember to fill out the `requirements.txt` file with whatever dependencies that you are using
+* [x] Remember to comply with good coding practices (`pep8`) while doing the project
+* [x] Do a bit of code typing and remember to document essential parts of your code
+* [ ] Setup version control for your data or part of your data
+* [x] Construct one or multiple docker files for your code
+* [x] Build the docker files locally and make sure they work as intended
+* [x] Write one or multiple configurations files for your experiments
+* [x] Used Hydra to load the configurations and manage your hyperparameters
+* [x] When you have something that works somewhat, remember at some point to to some profiling and see if
+      you can optimize your code
+* [x] Use Weights & Biases to log training progress and other important metrics/artifacts in your code. Additionally,
+      consider running a hyperparameter optimization sweep.
+* [ ] Use Pytorch-lightning (if applicable) to reduce the amount of boilerplate in your code
+
+### Week 2
+
+* [x] Write unit tests related to the data part of your code
+* [x] Write unit tests related to model construction and or model training
+* [x] Calculate the coverage.
+* [x] Get some continuous integration running on the github repository
+* [ ] Create a data storage in GCP Bucket for you data and preferable link this with your data version control setup
+* [x] Create a trigger workflow for automatically building your docker images
+* [x] Get your model training in GCP using either the Engine or Vertex AI
+* [x] Create a FastAPI application that can do inference using your model
+* [ ] If applicable, consider deploying the model locally using torchserve
+* [x] Deploy your model in GCP using either Functions or Run as the backend
+
+### Week 3
+
+* [ ] Check how robust your model is towards data drifting
+* [ ] Setup monitoring for the system telemetry of your deployed model
+* [ ] Setup monitoring for the performance of your deployed model
+* [ ] If applicable, play around with distributed data loading
+* [ ] If applicable, play around with distributed model training
+* [ ] Play around with quantization, compilation and pruning for you trained models to increase inference speed
+
+### Additional
+
+* [ ] Revisit your initial project description. Did the project turn out as you wanted?
+* [ ] Make sure all group members have a understanding about all parts of the project
+* [ ] Uploaded all your code to github
+
 ## Group information
 
 ### Question 1
@@ -49,7 +105,7 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 1 fill here ---
+27
 
 ### Question 2
 > **Enter the study number for each member in the group**
@@ -60,7 +116,7 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 2 fill here ---
+s183951, s173853, s212804
 
 ### Question 3
 > **What framework did you choose to work with and did it help you complete the project?**
@@ -73,7 +129,7 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 3 fill here ---
+We choose to work with the pytorch geometric framework, from where we got both the dataset and the model framework. The framework itself actually complicated the project a bit as a lot of the time was used on dependency issues and installation requirements that did not work (most torch-sparse and torch-scatter). However the framework itself worked just fine once installed and we were able to create, train and predict using a model from the framework. We got the data from the Dataset class of pytorch-geometric. We used many of the frameworks taught in the course such as wandb, docker, github actions and gcp. We did not use any frameworks not taught in the course. 
 
 ## Coding environment
 
@@ -92,7 +148,7 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 4 fill here ---
+We used conda for managing our dependencies. The list of dependencies was auto-generated using pipreqs. To get a complete copy of your development environment, one would have to run the following command: `conda env create -f environment.yml`. 
 
 ### Question 5
 
@@ -107,7 +163,7 @@ be installed with `pip install click markdown`.
 > *experiments.*
 > Answer:
 
---- question 5 fill here ---
+The vast majority of the code is found in the src_2 folder, the rests of the folders should be self explanatory which is one of the benefits of cookiecutter. We removed the folders notebooks, models and src, and added the src_2 folder instead. This was done because when building an image, installing all the packages with pip would create a src folder that would interfere with the import statements within the source folder. Even when we interacted with our docker images we were unable to uninstall the faulty 'src' module and thus settled upon just giving our module a different name to avoid this conflict. We added a tests folder containing a few unit tests. The yml files and the dockerfile(s) was added directly to the root of the project. The models are created in the outputs folder by default using hydra. 
 
 ### Question 6
 
@@ -118,7 +174,8 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 6 fill here ---
+We added documentation to the code using docstrings for the functions that were more difficult to understand, to explain their purpose. In terms of styling, we used black to format the code in order to be pep8 compliant, and isort to sort the import statements. We also added typing to most of our functions as a good coding practice, despite their simplicity.
+This makes it easier when multiple people are contributing to a project as the code should be more readable. Also when complying to a standard there is less probability for errors (https://standards.ieee.org/beyond-standards/what-are-standards-why-are-they-important/).
 
 ## Version control
 
@@ -127,18 +184,24 @@ be installed with `pip install click markdown`.
 
 ### Question 7
 
-> **How many tests did you implement?**
+> **How many tests did you implement and what are they testing in your code?**
+>
+> Answer length: 50-100 words.
+>
+> Example:
+> *In total we have implemented X tests. Primarily we are testing ... and ... as these the most critical parts of our*
+> *application but also ... .*
 >
 > Answer:
 
---- question 7 fill here ---
+We implemented data and training testing. We test whether the dataset is valid, and check for parameter update during training by training a model for one epoch on a random dataset and then looking at the gradients of the model parameters. 
 
 ### Question 8
 
 > **What is the total code coverage (in percentage) of your code? If you code had an code coverage of 100% (or close**
 > **to), would you still trust it to be error free? Explain you reasoning.**
 >
-> **Answer length: 100-200 words.**
+> Answer length: 100-200 words.
 >
 > Example:
 > *The total code coverage of code is X%, which includes all our source code. We are far from 100% coverage of our **
@@ -146,7 +209,7 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 8 fill here ---
+The total code coverage of our source code is 8%. To include all the source scripts, we had to use the command: `coverage run --source='src_2' -m pytest tests/`. We are far from 100% of our code and even if we were, that doesn't mean that it would be error free: 100% coverage only means that all the code would run when the tests are executed. 
 
 ### Question 9
 
@@ -161,7 +224,7 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 9 fill here ---
+We made use of branches in the project, primarily so that each person could work on their own branch as to not interfere with the work of the others. A new branch was typically also created while prototyping a new feature (e.g. a branch for Docker, Github Actions etc.). Pull requests were then used to merge the branches to the main branch. 
 
 ### Question 10
 
@@ -176,7 +239,7 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 10 fill here ---
+We did not make use of dvc as the dataset was a part of the package that was also used to create the network. Thus the data never changed and nothing new was added to the data. Therefore data version control did not make sense in this project. However if the project was using data that might change and it could be useful to capture which version of the data that was used in a given commit to github. 
 
 ### Question 11
 
@@ -192,7 +255,7 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 11 fill here ---
+We are running unittesting. We test two operating systems, Ubuntu and Windows and python version 3.10 which is compatible with pytorch geometric. We also make use of caching to avoid redownloading all the packages every time the workflow gets triggered. An example of a triggered workflow can be seen here: https://github.com/Fuedyolo/mlops_final_project/actions/runs/3965723650. 
 
 ## Running code and tracking experiments
 
@@ -210,8 +273,8 @@ be installed with `pip install click markdown`.
 > *We used a simple argparser, that worked in the following way: python my_script.py --lr 1e-3 --batch_size 25*
 >
 > Answer:
-
---- question 12 fill here ---
+      
+We configured training experiments with Hydra, with the default configuration being the optimal hyperaparameters obtained after a hyperparameter sweep. Therefore, training a model is as simple as: `python src/models/train_model.py`. The inference script uses click which takes the model and data paths as arguments: `python src/models/predict_model.py MODEL_FILEPATH DATA_FILEPATH`. 
 
 ### Question 13
 
@@ -226,7 +289,8 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 13 fill here ---
+We used config files such that each training of a model would create a hydra folder in the outputs folder with a config.yaml file which indicates the settings used for that training, eg. epochs, learning rate etc. To reproduce an experiment exp.yml located in the experiment folder, one would have to use the command: `python src/models/train_model.py experiment=exp`. 
+
 
 ### Question 14
 
@@ -243,7 +307,8 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 14 fill here ---
+![screenshot](figures/sweep.png)
+The first 5 charts track the train and test loss and accuracy for 4 runs of a hyperparameter sweep. The last chart tracks the loss of 4 experiments with the default configuration, e.g. using the hyperparameters of the best model found during the hyperparameter sweep. These metrics are important because they reflect how well our model is learning and is able to generalize to unseen data. 
 
 ### Question 15
 
@@ -258,7 +323,7 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 15 fill here ---
+We used docker mostly to get the different part of the project to work with gcp. We used the docker image to both train the model on gcp but also to deploy a function with cloud run. The first docker image is run by simply `docker run <name> trainer:latest`. The second docker image is run by the same command and by specifying which port the user wants to be able to run the application on. 
 
 ### Question 16
 
@@ -273,7 +338,7 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 16 fill here ---
+The code for training and predicting was provided in the documentation of pytorch geometric as an introduction using the example of the Cora dataset, which is similar to ours, so we didn't have bugs related to this. However, we ran into an error with the hyperparameter sweep using wandb. By comparing with the example provided by the documentation, and inserting it into our code, we figured out that click was responsible for the error, and removing it solved the issue. Although the code is probably already optimized because it comes from the documentation, we profiled the main code and found that Hydra had the longest runtime in our training script.
 
 ## Working in the cloud
 
@@ -290,14 +355,14 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 17 fill here ---
+We used the following services: Compute Engine, cloud trigger, cloud run, vertex ai and container registry. Compute Engine was used to create a VM, the specifications of the VM was similar to the ones used in the course. The container registry was used to store the image that was created from the dockerfile. Cloud triggers was used to automatically create the new container image when the main branch of the github repo was updated (this was disabled most of the time as new docker images were not needed). Cloud run was used to deploy a simple app that let the user input a datapoint and then predict the output. Vertex ai was used to do model training. 
 
 ### Question 18
 
 > **The backbone of GCP is the Compute engine. Explained how you made use of this service and what type of VMs**
 > **you used?**
 >
-> Answer length: 50-100 words.
+> Answer length: 100-200 words.
 >
 > Example:
 > *We used the compute engine to run our ... . We used instances with the following hardware: ... and we started the*
@@ -305,7 +370,10 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 18 fill here ---
+We used the compute engine to create the instance we used for almost all other gcp features in this project. The following hardware was used: 
+* Machine type: n1-standard-1
+* CPU platform: Intel Haswell
+* Architecture: x86/64
 
 ### Question 19
 
@@ -314,7 +382,7 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 19 fill here ---
+We did not use GCP buckets as the dataset was stored within the torch-geometric package and therefore available to everyone with the package.
 
 ### Question 20
 
@@ -323,7 +391,8 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 20 fill here ---
+Below is the image of the containers in the registry, however they are in the same project as the ones used during the exercises in the course.
+![container registry](figures/registry.png)
 
 ### Question 21
 
@@ -348,7 +417,7 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 22 fill here ---
+Using a fastapi application the model was deployed to google cloud run and can be invoked by giving a valid data sample where the model will then predict and return the outcome. The setup settings was 
 
 ### Question 23
 
@@ -363,7 +432,7 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 23 fill here ---
+No, monitoring our application wouldn't make sense because our data is fixed, so there can be no data drift. 
 
 ### Question 24
 
@@ -377,7 +446,7 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 24 fill here ---
+The billing pane did not show any costs used at all during the month of january however one group member used up all the credits and another used around half of the credits up until the day before the exam. Most of the credits were spend in cloud engine, cloud logging, cloud storage and cloud build.
 
 ## Overall discussion of project
 
@@ -412,7 +481,7 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 26 fill here ---
+Since the training and predicting code was already provided, the main difficulty of running the experiments was understanding how to configure them, and run a hyperparameter sweep, using hydra and wandb.
 
 ### Question 27
 
@@ -429,4 +498,8 @@ be installed with `pip install click markdown`.
 >
 > Answer:
 
---- question 27 fill here ---
+* s173853 : was in charge of building the docker images and the unit tests/github actions
+* s212804 : was in charge of setting up the project structure, configuring and logging the experiments, as well as profiling.
+* s183951 : was in charge of the things done with gcp and the deployement of the model
+
+Further all team members contributed to the writing of the report.
