@@ -469,7 +469,7 @@ The billing pane did not show any costs used at all during the month of january 
 The starting point of the diagram is out local setup on our computers. In this step the code is being developed and structured using the cookiecutter template. Hydra is responsible for the local logging of experiments while wandb is used to log and visualize the results as well as doing the hyperparameter sweep.
 Whenever the code is committed and pushed to GitHub (typically to a new development branch) this activates a sequence of processes. 1) unittests on the data and the main ML model are carried out via GitHub actions. Caching of dependencies was used to speed up this process. 2) A cloud build of the model is made via GCL and the dockerfile (which makes use of the requirements file to install the required libraries). The build concludes with a new model being trained on the data and the results being logged by Hydra/wandb. 3) As an alternative to 2) local docker images were also being generated throughout the development process.
 In order to use our model a user can either clone the github repo or pull the latest docker image. The app is not deployed 100% yet but it is possible to upload a dataset to a locally deployed fastapi app and use the model there.
-![overview](figures/overview.png)
+![overview](figures/Overview.jpg)
 
 ### Question 26
 
