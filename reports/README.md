@@ -371,9 +371,9 @@ We used the following services: Compute Engine, cloud trigger, cloud run, vertex
 > Answer:
 
 We used the compute engine to create the instance we used for almost all other gcp features in this project. The following hardware was used: 
-Machine type: n1-standard-1
-CPU platform: Intel Haswell
-Architecture: x86/64
+* Machine type: n1-standard-1
+* CPU platform: Intel Haswell
+* Architecture: x86/64
 
 ### Question 19
 
@@ -498,8 +498,8 @@ Since the training and predicting code was already provided, the main difficulty
 >
 > Answer:
 
-s173853 : was in charge of building the docker images and the unit tests/github actions
-s212804 : was in charge of setting up the project structure, configuring and logging the experiments, as well as profiling.
-s183951 : was in charge of the things done with gcp and the deployement of the model
+* s173853 : was in charge of building the docker images and the unit tests/github actions
+* s212804 : was in charge of setting up the project structure, configuring and logging the experiments, as well as profiling.
+* s183951 : was in charge of the things done with gcp and the deployement of the model
 
 Further all team members contributed to the writing of the report.
