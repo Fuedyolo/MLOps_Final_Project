@@ -209,7 +209,7 @@ We implemented data and training testing. We test whether the dataset is valid, 
 >
 > Answer:
 
---- question 8 fill here ---
+The total code coverage of our source code is 8%. To include all the source scripts, we had to use the command: `coverage run --source='src_2' -m pytest tests/`. We are far from 100% of our code and even if we were, that doesn't mean that it would be error free: 100% coverage only means that all the code would run when the tests are executed. 
 
 ### Question 9
 
@@ -224,7 +224,7 @@ We implemented data and training testing. We test whether the dataset is valid, 
 >
 > Answer:
 
-We made use of branches in the project, primarily so that each person could work on their own branch as to not interfere with the work of the others. A new branch was typically also created while prototyping a new feature (e.g. a branch for Docker, Github Actions etc.). Pull requests were then used to merge the branches. 
+We made use of branches in the project, primarily so that each person could work on their own branch as to not interfere with the work of the others. A new branch was typically also created while prototyping a new feature (e.g. a branch for Docker, Github Actions etc.). Pull requests were then used to merge the branches to the main branch. 
 
 ### Question 10
 
@@ -239,7 +239,7 @@ We made use of branches in the project, primarily so that each person could work
 >
 > Answer:
 
-We did not make use of dvc as the dataset was a part of the package that was also used to create the network. Thus the data never changed and nothing new was added to the data. Therefor data version control did not make sense in this project. However if the project was using data that might change and it could be usefull to capture which version of the data that was used in a given commit to github. 
+We did not make use of dvc as the dataset was a part of the package that was also used to create the network. Thus the data never changed and nothing new was added to the data. Therefore data version control did not make sense in this project. However if the project was using data that might change and it could be useful to capture which version of the data that was used in a given commit to github. 
 
 ### Question 11
 
@@ -255,7 +255,7 @@ We did not make use of dvc as the dataset was a part of the package that was als
 >
 > Answer:
 
---- question 11 fill here ---
+We are running unittesting. We test two operating systems, Ubuntu and Windows and python version 3.10 which is compatible with pytorch geometric. We also make use of caching to avoid redownloading all the packages every time the workflow gets triggered. An example of a triggered workflow can be seen here: https://github.com/Fuedyolo/mlops_final_project/actions/runs/3965723650. 
 
 ## Running code and tracking experiments
 
@@ -273,8 +273,8 @@ We did not make use of dvc as the dataset was a part of the package that was als
 > *We used a simple argparser, that worked in the following way: python my_script.py --lr 1e-3 --batch_size 25*
 >
 > Answer:
-
-We used a simple argparser for the predict model script which can be called with: python src_2/models/predict_model.py outputs\2023-01-13\21-47-22\trained_model.pt data\processed\dataset.pt The two paths specified is the path to the model and the path to the dataset. The training script can simply be called with python src_2/models/train_model.py, however wandb is used and the user is prompted the 3 standard wandb options. The application created with fastapi also needs a parameter which is the dataset, and with that it gives the accuracy for the model we trained. 
+      
+We configured training experiments with Hydra, with the default configuration being the optimal hyperaparameters obtained after a hyperparameter sweep. Therefore, training a model is as simple as: `python src/models/train_model.py`. The inference script uses click which takes the model and data paths as arguments: `python src/models/predict_model.py MODEL_FILEPATH DATA_FILEPATH`. 
 
 ### Question 13
 
@@ -289,7 +289,7 @@ We used a simple argparser for the predict model script which can be called with
 >
 > Answer:
 
-We used config files such that each run of the model would create a hydra folder with a config.yaml file which indicitas the settings used for that run, eg. epochs, learning rate etc. 
+We used config files such that each training of a model would create a hydra folder in the outputs folder with a config.yaml file which indicates the settings used for that training, eg. epochs, learning rate etc. To reproduce an experiment exp.yml located in the experiment folder, one would have to use the command: `python src/models/train_model.py experiment=exp`. 
 
 
 ### Question 14
@@ -307,7 +307,8 @@ We used config files such that each run of the model would create a hydra folder
 >
 > Answer:
 
---- question 14 fill here ---
+![screenshot](figures/sweep.png)
+The first 5 charts track the train and test loss and accuracy for 4 runs of a hyperparameter sweep. The last chart tracks the loss of 4 experiments with the default configuration, e.g. using the hyperparameters of the best model found during the hyperparameter sweep. These metrics are important because they reflect how well our model is learning and is able to generalize to unseen data. 
 
 ### Question 15
 
@@ -322,7 +323,7 @@ We used config files such that each run of the model would create a hydra folder
 >
 > Answer:
 
-We used docker mostly to get the different part of the project to work with gcp. We used the docker image to both train the project on gcp but also to deploy a function with cloud run. The first docker image is run by simply docker run <name> trainer:latest. The second docker image is run by the same command and by specifying which port the user wants to be able to run the application on. 
+We used docker mostly to get the different part of the project to work with gcp. We used the docker image to both train the model on gcp but also to deploy a function with cloud run. The first docker image is run by simply `docker run <name> trainer:latest`. The second docker image is run by the same command and by specifying which port the user wants to be able to run the application on. 
 
 ### Question 16
 
@@ -337,7 +338,7 @@ We used docker mostly to get the different part of the project to work with gcp.
 >
 > Answer:
 
---- question 16 fill here ---
+The code for training and predicting was provided in the documentation of pytorch geometric as an introduction using the example of the Cora dataset, which is similar to ours, so we didn't have bugs related to this. However, we ran into an error with the hyperparameter sweep using wandb. By comparing with the example provided by the documentation, and inserting it into our code, we figured out that click was responsible for the error, and removing it solved the issue. Although the code is probably already optimized because it comes from the documentation, we profiled the main code and found that Hydra had the longest runtime in our training script.
 
 ## Working in the cloud
 
@@ -354,7 +355,8 @@ We used docker mostly to get the different part of the project to work with gcp.
 >
 > Answer:
 
-We used the following services: Compute Engine, cloud trigger, cloud run, vertex ai and container registry. Compute Engine was used to create the a VM, the specifications of the VM was similar to the ones used in the course. The container registry was used to store the image that was created from the dockerfile. Cloud triggers was used to automatically create the new container image when the main branch of the github repo was updated (this was disabled most of the time as new docker images were not needed) Cloud run was used to deploy a simple app that let the user input a datapoint and then predict the output. Vertex ai was used to do model training. 
+We used the following services: Compute Engine, cloud trigger, cloud run, vertex ai and container registry. Compute Engine was used to create a VM, the specifications of the VM was similar to the ones used in the course. The container registry was used to store the image that was created from the dockerfile. Cloud triggers was used to automatically create the new container image when the main branch of the github repo was updated (this was disabled most of the time as new docker images were not needed). Cloud run was used to deploy a simple app that let the user input a datapoint and then predict the output. Vertex ai was used to do model training. 
+
 ### Question 18
 
 > **The backbone of GCP is the Compute engine. Explained how you made use of this service and what type of VMs**
@@ -368,10 +370,11 @@ We used the following services: Compute Engine, cloud trigger, cloud run, vertex
 >
 > Answer:
 
-We used the compute engine to create the instance we used for almost all other gcp feautres in this project. The following hardware was used: 
-Machine type: n1-standard-1
-CPU platform: Intel Haswell
-Architecture: x86/64
+We used the compute engine to create the instance we used for almost all other gcp features in this project. The following hardware was used: 
+* Machine type: n1-standard-1
+* CPU platform: Intel Haswell
+* Architecture: x86/64
+
 ### Question 19
 
 > **Insert 1-2 images of your GCP bucket, such that we can see what data you have stored in it.**
@@ -379,7 +382,7 @@ Architecture: x86/64
 >
 > Answer:
 
-We did not use GCP buckets as the dataset was stored within the torch-geometric package and therefor available to everyone with the package.
+We did not use GCP buckets as the dataset was stored within the torch-geometric package and therefore available to everyone with the package.
 
 ### Question 20
 
@@ -389,7 +392,7 @@ We did not use GCP buckets as the dataset was stored within the torch-geometric 
 > Answer:
 
 Below is the image of the containers in the registry, however they are in the same project as the ones used during the exercises in the course.
-[container registry](figures/registry.png)
+![container registry](figures/registry.png)
 
 ### Question 21
 
@@ -414,7 +417,7 @@ Below is the image of the containers in the registry, however they are in the sa
 >
 > Answer:
 
-Using a fastapi application the model was delpoyed to google cloud run and can be invoked by giving a valid data sample where the model will then predict and return the outcome. The setup settings was 
+Using a fastapi application the model was deployed to google cloud run and can be invoked by giving a valid data sample where the model will then predict and return the outcome. The setup settings was 
 
 ### Question 23
 
@@ -429,7 +432,7 @@ Using a fastapi application the model was delpoyed to google cloud run and can b
 >
 > Answer:
 
---- question 23 fill here ---
+No, monitoring our application wouldn't make sense because our data is fixed, so there can be no data drift. 
 
 ### Question 24
 
@@ -478,7 +481,7 @@ The billing pane did not show any costs used at all during the month of january 
 >
 > Answer:
 
---- question 26 fill here ---
+Since the training and predicting code was already provided, the main difficulty of running the experiments was understanding how to configure them, and run a hyperparameter sweep, using hydra and wandb.
 
 ### Question 27
 
@@ -495,8 +498,8 @@ The billing pane did not show any costs used at all during the month of january 
 >
 > Answer:
 
-s173853 : was in charge of building the docker images and the unit tests/github actions
-s212804 : was in charge of setting up the project structure and building the model and weights/biases
-s183951 : was in charge of the things done with gcp and the deployement of the model
+* s173853 : was in charge of building the docker images and the unit tests/github actions
+* s212804 : was in charge of setting up the project structure, configuring and logging the experiments, as well as profiling.
+* s183951 : was in charge of the things done with gcp and the deployement of the model
 
 Further all team members contributed to the writing of the report.
