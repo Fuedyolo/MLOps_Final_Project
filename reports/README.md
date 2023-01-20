@@ -400,8 +400,8 @@ Below is the image of the containers in the registry, however they are in the sa
 > **your project. You can take inspiration from [this figure](figures/build.png).**
 >
 > Answer:
-
---- question 21 fill here ---
+The following figure shows the cloud builds, the trigger was disabled as it was not necessary to upload a new image to gcp each time we pushed to main, but the latest successfull one was also the imaged used for training with vertex ai
+![cloud build](figures/build.png)
 
 ### Question 22
 
@@ -417,7 +417,7 @@ Below is the image of the containers in the registry, however they are in the sa
 >
 > Answer:
 
-Using a fastapi application the model was deployed to google cloud run and can be invoked by giving a valid data sample where the model will then predict and return the outcome. The setup settings was 
+Using a fastapi application the model was attempted deployed to google cloud run and can be invoked by giving a valid dataset (the used dataset) and returning the accuracy for the model that we trained. 
 
 ### Question 23
 
@@ -467,7 +467,7 @@ The billing pane did not show any costs used at all during the month of january 
 >
 > Answer:
 
---- question 25 fill here ---
+![overview](figures/overview.png)
 
 ### Question 26
 
@@ -481,7 +481,7 @@ The billing pane did not show any costs used at all during the month of january 
 >
 > Answer:
 
-Since the training and predicting code was already provided, the main difficulty of running the experiments was understanding how to configure them, and run a hyperparameter sweep, using hydra and wandb.
+The main difficulty of running the experiments was understanding how to configure them, and run a hyperparameter sweep, using hydra and wandb. A minor setback was the issues with the required dependencies and the installation of those. A big challenge was getting the fastAPI app to work with correct and to work with cloud run. Furthermore, the specfic formulation of the docker files was also a big challenge and definently something that requires a lot of practice to master. As with all data science/software development a lot of time was spend on minor bugs, in this case path related bugs especially. 
 
 ### Question 27
 
